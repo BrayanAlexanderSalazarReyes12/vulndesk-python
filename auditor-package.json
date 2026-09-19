@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0",
+  "id": "vulndesk-python",
+  "name": "VulnDesk Python",
+  "kind": "web-application",
+  "language": "python",
+  "framework": ["flask"],
+  "runtime": {
+    "pythonVersion": "3.11"
+  },
+  "entrypoints": [
+    {
+      "type": "application",
+      "path": "run.py"
+    },
+    {
+      "type": "app-factory",
+      "path": "vulndesk/app.py"
+    },
+    {
+      "type": "dependency-manifest",
+      "path": "requirements.txt"
+    },
+    {
+      "type": "template-root",
+      "path": "vulndesk/templates"
+    }
+  ],
+  "build": {
+    "tool": "pip",
+    "manifest": "requirements.txt",
+    "install": "pip install -r requirements.txt",
+    "command": "python -m compileall vulndesk run.py",
+    "start": "python run.py"
+  },
+  "scan": {
+    "roots": [
+      "vulndesk",
+      "run.py"
+    ],
+    "include": [
+      "**/*.py",
+      "**/*.html",
+      "requirements.txt"
+    ],
+    "exclude": [
+      ".venv/**",
+      "venv/**",
+      "__pycache__/**",
+      "instance/**",
+      ".git/**"
+    ]
+  },
+  "groundTruth": {
+    "manifest": "LAB_MANIFEST.md"
+  },
+  "lab": {
+    "intentionallyVulnerable": true,
+    "safeForProduction": false
+  }
+}
