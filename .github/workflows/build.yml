@@ -1,0 +1,29 @@
+name: Build VulnDesk Python
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compile Python
+        run: python -m compileall vulndesk run.py
+
+      - name: Load Flask application
+        run: python -c "from vulndesk.app import create_app; app=create_app(); print('app-load-ok', len(app.url_map._rules))"
