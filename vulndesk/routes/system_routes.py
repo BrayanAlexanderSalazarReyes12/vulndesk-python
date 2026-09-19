@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 from flask import Blueprint, jsonify, request
@@ -11,7 +12,7 @@ def diagnostic():
 
     # LAB-CMD-201: entrada del usuario concatenada a un comando ejecutado
     # mediante shell=True.
-    command = "ping -n 1 " + host if subprocess.os.name == "nt" else "ping -c 1 " + host
+    command = "ping -n 1 " + host if os.name == "nt" else "ping -c 1 " + host
 
     try:
         completed = subprocess.run(
