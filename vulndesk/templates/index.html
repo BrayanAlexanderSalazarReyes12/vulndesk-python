@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VulnDesk Python</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 980px; margin: 30px auto; padding: 0 20px; background:#f5f7fa; color:#1f2937; }
+        .card { background:white; border:1px solid #dbe3ea; border-radius:10px; padding:18px; margin-bottom:16px; }
+        input, textarea, button { padding:9px; margin:4px 0; }
+        input[type=text], input[type=password], textarea { min-width:320px; }
+        textarea { min-height:80px; }
+        a { color:#075985; }
+        code, pre { background:#eef2f7; padding:4px 6px; }
+        .warning { background:#fff3cd; border:1px solid #ffe69c; padding:12px; border-radius:8px; }
+    </style>
+</head>
+<body>
+    <h1>VulnDesk Python</h1>
+
+    <div class="warning">
+        Aplicación intencionalmente vulnerable para pruebas controladas del Auditor.
+        No desplegar en Internet.
+    </div>
+
+    <div class="card">
+        <h2>Login</h2>
+        <form method="post" action="/api/login">
+            <input name="username" value="user" placeholder="Usuario">
+            <input name="password" type="password" value="user123" placeholder="Contraseña">
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Búsqueda de tickets</h2>
+        <form method="get" action="/api/search">
+            <input name="q" placeholder="Título o propietario">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Perfiles</h2>
+        <p>
+            <a href="/api/profile/1">Perfil 1</a> ·
+            <a href="/api/profile/2">Perfil 2</a> ·
+            <a href="/api/profile/3">Perfil 3</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Archivos</h2>
+        <p><a href="/api/download?file=manual.txt">Descargar manual.txt</a></p>
+        <form method="post" action="/api/upload" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <button type="submit">Subir archivo</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Diagnóstico</h2>
+        <form method="get" action="/api/diagnostic">
+            <input name="host" value="127.0.0.1">
+            <button type="submit">Ejecutar ping</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Fetch URL</h2>
+        <form method="get" action="/api/fetch">
+            <input name="url" value="http://example.com">
+            <button type="submit">Consultar</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Vista previa de plantilla</h2>
+        <form method="post" action="/api/preview-template">
+            <textarea name="template">Hola {{ name }}</textarea><br>
+            <input name="name" value="usuario">
+            <button type="submit">Renderizar</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Otros endpoints</h2>
+        <p><a href="/api/admin">Panel administrativo</a></p>
+        <p><a href="/api/go?next=/">Redirect de laboratorio</a></p>
+        <p><code>PUT /api/profile/:id</code> acepta <code>email</code> y <code>role</code>.</p>
+    </div>
+</body>
+</html>
